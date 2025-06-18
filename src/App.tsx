@@ -12,14 +12,20 @@ function App() {
   const [user] = useAuthState(auth);
 
   return (
-    <Router>
+    <Router basename="/LiD-Test">
       <Routes>
-        <Route path="/admin" element={user ? <AdminDashboard /> : <Navigate to="/login" />} />
+        {/* Admin Pages */}
         <Route path="/login" element={<LoginPage />} />
+        <Route path="/admin" element={user ? <AdminDashboard /> : <Navigate to="/login" />} />
+
+        {/* User Quiz Flow */}
         <Route path="/" element={<UserLanding />} />
         <Route path="/quiz" element={<QuizPage />} />
         <Route path="/result" element={<ResultPage />} />
         <Route path="/review" element={<FlashcardReview />} />
+
+        {/* Fallback */}
+        <Route path="*" element={<Navigate to="/" />} />
       </Routes>
     </Router>
   );
